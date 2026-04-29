@@ -20,16 +20,25 @@ variable "private_subnet_ids" {
   description = "private subnets for ALB"
 }
 
+variable "alb_listener_port" {
+  type        = number
+  description = "Port for ALB listener"
+}
+
 variable "container_port" {
   type = number
   description = "container port"
-  default = 3000
+}
+
+variable "allowed_ingress_cidr" {
+  type        = list(string)
+  description = "allowed ingress cidr"
 }
 
 variable "health_check_path" {
   type = string
   description = "health check path"
-  default = "/"
+  default = var.health_check_path
 }
 variable "tags" {
   type        = map(string)
