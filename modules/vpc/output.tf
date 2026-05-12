@@ -1,13 +1,15 @@
 output "vpc_id" {
-  value = aws_vpc.this.id
+  value = aws_vpc.custom-vpc.id
 }
 
 output "public_subnet_ids" {
-  value = aws_subnet.public[*].id
+  description = "Public subnet IDs"
+  value       = aws_subnet.public[*].id
 }
 
 output "private_subnet_ids" {
-  value = aws_subnet.private[*].id
+  description = "private subnet IDs"
+  value       = aws_subnet.private[*].id
 }
 
 output "private_route_table_id" {

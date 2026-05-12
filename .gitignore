@@ -11,3 +11,12 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.tfplan
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
