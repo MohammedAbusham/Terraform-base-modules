@@ -11,9 +11,9 @@ resource "aws_cloudwatch_log_group" "ecs" {
   })
 }
 
-#--------------------
-# IAM Role
-#--------------------
+#---------------------------
+# IAM Role & Policy
+#---------------------------
 
 resource "aws_iam_role" "ecs_task_execution" {
   name = "${var.project_name}-ecs-task-execution-role"
@@ -62,9 +62,9 @@ resource "aws_iam_role" "ecs_task" {
   })
 }
 
-#--------------
+#----------------------------------------
 # ECS Cluster 
-#--------------
+#----------------------------------------
 
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = "${var.project_name}-cluster"
@@ -73,6 +73,10 @@ resource "aws_ecs_cluster" "ecs_cluster" {
     Name = "${var.project_name}-cluster"
   })
 }
+
+#---------------------
+# ECS Task Definition 
+#---------------------
 
 resource "aws_ecs_task_definition" "aws_ecs_task_definition" {
   family                   = "${var.project_name}-task"
@@ -113,10 +117,14 @@ resource "aws_ecs_task_definition" "aws_ecs_task_definition" {
   })
 }
 
+#------------------
+# ECS service 
+#------------------
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.project_name}-service"
-  cluster         = aws_ecs_cluster.this.id
-  task_definition = aws_ecs_task_definition.this.arn
+  cluster         = aws_ecs_cluster.ecs_cluster.id
+  task_definition = aws_ecs_task_definition.aws_ecs_task_definition.arn
   desired_count   = var.desired_count
   launch_type     = "FARGATE"
 
