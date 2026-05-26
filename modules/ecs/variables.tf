@@ -4,6 +4,10 @@ variable "project_name" {
   default     = "Threat-composer"
 }
 
+variable "alb_security_group_id" {
+  type = string
+}
+
 variable "aws_region" {
   type = string
 }
@@ -11,6 +15,12 @@ variable "aws_region" {
 variable "vpc_id" {
   type = string
 }
+
+variable "allowed_ingress_cidr" {
+  type        = list(string)
+  description = "allowed ingress cidr"
+}
+
 
 variable "private_subnet_ids" {
   type = list(string)
